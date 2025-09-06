@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paramètres client</title>
+<style>
+  :root{
+    --bg:#f0f4f8;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --primary1:#00b894; /* vert turquoise */
+    --primary2:#009c9a; /* vert profond */
+    --card:#fff;
+    --line:#e5e7eb;
+    --radius:16px;
+    --shadow:0 8px 20px rgba(0,0,0,.08);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
+
+  /* En-tête */
+  header{
+    padding:24px;
+    text-align:center;
+    background:linear-gradient(135deg,var(--primary1),var(--primary2));
+    color:#fff;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+  }
+  header h1{
+    margin:0;
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:1px;
+  }
+
+  /* Conteneur */
+  .container{
+    max-width:800px;
+    margin:32px auto;
+    padding:0 16px;
+    display:grid;
+    gap:24px;
+  }
+
+  /* Cartes */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:24px;
+    box-shadow:var(--shadow);
+    transition:transform .2s;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+  }
+
+  h2{
+    margin:0 0 16px;
+    font-size:18px;
+    font-weight:600;
+    color:var(--primary2);
+    border-left:4px solid var(--primary1);
+    padding-left:10px;
+  }
+
+  /* Champs */
+  .row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .field{
+    flex:1 1 220px;
+  }
+  label{
+    font-size:13px;
+    color:var(--muted);
+    display:block;
+    margin-bottom:6px;
+  }
+  input{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    font-size:14px;
+    background:#f9fafb;
+    transition:border .2s,box-shadow .2s;
+  }
+  input:focus{
+    outline:none;
+    border-color:var(--primary1);
+    box-shadow:0 0 0 3px rgba(0,184,148,.2);
+    background:#fff;
+  }
+  .mono{
+    font-family:ui-monospace,monospace;
+    letter-spacing:1px;
+  }
+
+  /* Boutons */
+  .btn{
+    padding:12px 20px;
+    border:none;
+    border-radius:999px;
+    background:linear-gradient(135deg,var(--primary1),var(--primary2));
+    color:#fff;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    transition:opacity .2s,transform .2s;
+  }
+  .btn:hover{
+    opacity:.9;
+    transform:translateY(-2px);
+  }
+  .actions{
+    text-align:right;
+    margin-top:16px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Paramètres client</h1>
+</header>
+
+<div class="container">
+
+  <section class="card">
+    <h2>Profil</h2>
+    <div class="row">
+      <div class="field">
+        <label>Nom complet</label>
+        <input value=" Caillonneau Nicole ">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" value="nicolecaillonneau0@gmail.com">
+      </div>
+      <div class="field">
+        <label>Téléphone</label>
+        <input value="+33 7 45 38 86 67">
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Coordonnées bancaires</h2>
+    <div class="row">
+      <div class="field">
+        <label>Code banque</label>
+        <input class="mono" value="30004">
+      </div>
+      <div class="field">
+        <label>Code guichet</label>
+        <input class="mono" value="00123">
+      </div>
+      <div class="field">
+        <label>N° de compte</label>
+        <input class="mono" value="00002589654">
+      </div>
+      <div class="field">
+        <label>Clé RIB</label>
+        <input class="mono" value="45">
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label>IBAN</label>
+        <input class="mono" value="FR76 3000 4001 2300 0025 8965 445">
+      </div>
+      <div class="field">
+        <label>BIC</label>
+        <input class="mono" value="BNPAFRPPPXV">
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="window.print()">Imprimer le RIB</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Sécurité</h2>
+    <div class="row">
+      <div class="field">
+        <label>Mot de passe</label>
+        <input type="password" placeholder="••••••••">
+      </div>
+      <div class="field">
+        <label>Carte bancaire</label>
+        <input value="Désactivé">
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn">Mettre à jour</button>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

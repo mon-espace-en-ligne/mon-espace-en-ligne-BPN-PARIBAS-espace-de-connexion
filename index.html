@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Connexion à mon compte</title>
+
+  <!-- Fonts and Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <style>
+    body {
+      font-family: 'Dosis', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #e9f5f5, #f4f8f9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      width: 100%;
+      background-color: #fff;
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar img {
+      max-width: 70px;
+    }
+
+    .container {
+      margin-top: 40px;
+      width: 90%;
+      max-width: 400px;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 12px 24px rgba(0, 156, 154, 0.1);
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #007d7a;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      color: #444;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 40px 12px 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      transition: 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-color: #009c9a;
+      outline: none;
+    }
+
+    .form-group .material-icons {
+      position: absolute;
+      right: 10px;
+      top: 36px;
+      color: #aaa;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #00c1b5, #009c9a);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #007f7b;
+      transform: scale(1.03);
+    }
+
+    .alert {
+      display: none;
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: 0.5s ease;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .alert-success {
+      background-color: #d1f3e2;
+      color: #0c5c45;
+      border: 1px solid #9de4c1;
+    }
+
+    .alert-error {
+      background-color: #fde3e4;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+    }
+
+    .info, .suite {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+      text-align: left;
+    }
+
+    .info a, .suite a {
+      color: #009c9a;
+      text-decoration: none;
+    }
+
+    .info a:hover, .suite a:hover {
+      color: #007f7b;
+    }
+
+    .suite hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 20px 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <img src="logo-2.png" alt="Logo BNP">
+  </div>
+
+  <div class="container">
+    <h1>BNP PARIBAS </h1>
+    <form>
+      <div class="form-group">
+        <label for="number">1.Email</label>
+        <input type="tel" class="number" id="number" maxlength="10" required aria-label="Numéro client">
+        <span class="material-icons">person</span>
+      </div>
+      <div class="form-group">
+        <label for="pass">2. Mon code secret (8 chiffres)</label>
+        <input type="password" class="pass" id="pass" maxlength="8" pattern="[0-9]*" inputmode="numeric" required aria-label="Code secret">
+        <span class="material-icons">lock</span>
+      </div>
+      <button type="button" onclick="valid()" class="btn-submit">Connexion</button>
+    </form>
+
+    <div class="alert"></div>
+
+    <div class="info">
+      <p><strong>Vos codes d'accès</strong></p>
+      <a href="#">Obtenir ses codes d'accès</a><br />
+      <a href="#">Code secret oublié</a>
+    </div>
+
+    <div class="suite">
+      <hr />
+      <p><strong>Conseils de sécurité</strong></p>
+      <p>Vérifiez que l'adresse du site commence bien par <strong>https://</strong></p>
+      <p>et contient une icône cadenas pour garantir une connexion sécurisée.</p>
+      <a href="#">Découvrez nos conseils de sécurité</a>
+    </div>
+  </div>
+
+  <script>
+    function valid() {
+      var clientNum = document.querySelector(".number");
+      var secretCode = document.querySelector(".pass");
+      var alertBox = document.querySelector(".alert");
+
+      alertBox.style.display = "none";
+      alertBox.classList.remove("alert-success", "alert-error");
+
+      if (clientNum.value && secretCode.value) {
+        if (clientNum.value === "2589654" && secretCode.value === "35795863") {
+          alertBox.textContent = "Connexion réussie...";
+          alertBox.classList.add("alert-success");
+          alertBox.style.display = "block";
+
+          setTimeout(function () {
+            window.location.href = "Solde.html";
+          }, 2000);
+
+          clientNum.value = '';
+          secretCode.value = '';
+        } else {
+          alertBox.textContent = "Accès incorrect. Veuillez vérifier vos accès et réessayer.";
+          alertBox.classList.add("alert-error");
+          alertBox.style.display = "block";
+        }
+      } else {
+        alertBox.textContent = "Veuillez remplir tous les champs.";
+        alertBox.classList.add("alert-error");
+        alertBox.style.display = "block";
+      }
+
+      setTimeout(function () {
+        alertBox.style.display = "none";
+      }, 4000);
+    }
+  </script>
+</body>
+</html>

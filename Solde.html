@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Compte Bancaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Style global */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e9f5f2;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* En-tête */
+     .header {
+    width: 100%;
+    background-color: #ffffff; /* Blanc */
+    color: #007A33; /* Adapter la couleur du texte pour qu'il reste lisible */
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+        .notification-icon {
+            position: absolute;
+            top: 15px;
+            left: 27px;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .notification-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .logo {
+            width: 120px;
+            margin: 10px 0;
+        }
+
+        /* Message d'alerte */
+        .message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            background-color: #ffe6e6;
+            padding: 10px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Conteneur principal */
+        .container {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Solde */
+        .balance {
+            font-size: 32px;
+            font-weight: bold;
+            color: #007A33;
+            margin: 15px 0;
+        }
+
+        /* Cartes (comptes) */
+      .card {
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    text-align: left;
+    background-color: rgba(0, 122, 51, 0.08); /* vert léger, transparent */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h4 {
+    font-size: 16px;
+    color: #007A33; /* vert dominant pour les titres */
+    margin: 0;
+}
+
+.card p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #007A33; /* vert normal, mais moins fort que le titre */
+    opacity: 0.7;   /* rend le solde plus doux */
+    margin: 5px 0 0;
+}
+
+        /* Transactions */
+        .info {
+            background-color: #f0f9f6;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 12px;
+            text-align: left;
+        }
+
+        .info h4 {
+            font-size: 14px;
+            color: #333;
+            margin: 0;
+        }
+
+        .info p {
+            font-size: 16px;
+            margin: 5px 0 0;
+        }
+
+        .debit { color: #d9534f; font-weight: bold; }
+        .credit { color: #5cb85c; font-weight: bold; }
+
+        /* Transactions cachées */
+        .hidden-transactions {
+            display: none;
+        }
+
+        /* Bouton pour afficher plus de transactions */
+        .toggle-btn {
+            display: block;
+            margin: 15px auto;
+            padding: 10px 20px;
+            background-color: #00A7AB;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background-color: #005f2b;
+        }
+
+        /* Boutons ronds */
+        .button-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .round-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .round-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .round-button-1 { background-image: url('illustration_carte.gif'); }
+        .round-button-2 { background-image: url('illustration_transfert_argent.gif'); }
+
+.container h2 {
+    color: #000000; 
+}
+        /* Pied de page */
+        footer {
+            text-align: center;
+            background-color: #00A7AB;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+.logout-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 40px;               /* largeur du bouton */
+    height: 40px;              /* hauteur du bouton */
+    border-radius: 50%;        /* le rend rond */
+    border: none;
+    background-image: url('icon-logout.gif'); /* chemin de ton icône */
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+}
+
+.logout-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.solde-gradient {
+    background: linear-gradient(90deg, #007A33, #00aaff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Bouton paramètres */
+.settings-btn {
+    position: fixed;
+    top: 100px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-image: url('paramètres.gif'); /* ton gif */
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.settings-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%; /* caché par défaut */
+    width: 80%;
+    max-width: 400px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    transition: left 0.4s ease;
+    z-index: 1000;
+}
+
+/* Quand le menu est ouvert */
+.sidebar.open {
+    left: 0;
+}
+
+/* Contenu du menu */
+.sidebar iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <img src="notification.gif" alt="Notifications" class="notification-icon" onclick="window.location.href='notification.html'">
+        <img src="logo.png" alt="Logo" class="logo"> 
+<h1 style="color: black;">Heureux de vous revoir !</h1>
+
+<!-- Bouton déconnexion -->
+<a href="#" class="logout-btn" onclick="confirmerDeconnexion(event)"></a>
+
+<script>
+function confirmerDeconnexion(event) {
+    event.preventDefault(); // empêche la redirection directe
+    const confirmation = confirm("Voulez-vous vraiment vous déconnecter ?");
+    if (confirmation) {
+        window.location.href = "index.html"; // redirige vers ta page de logout
+    }
+}
+</script>
+
+    <div class="message">Votre compte est bloqué.</div> 
+
+   <div class="container">
+        <h2>Mes comptes</h2>
+        <div class="balance">  </div>
+ <div class="container">
+    <div class="card" onclick="ouvrirPage('cheques.html')">
+        <h4>Comptes de chèques</h4>
+        <p class="solde-gradient">174,700,72 €</p>
+    </div>
+
+    <div class="card" onclick="ouvrirPage('cel.html')">
+        <h4>CEL</h4>
+        <p class="solde-gradient">226,120,49 €</p>
+    </div>
+
+    <div class="card" onclick="ouvrirPage('livret.html')">
+        <h4>Livret Dév. Durable</h4>
+        <p class="solde-gradient">12.000 €</p>
+    </div>
+</div>
+
+<script>
+    function ouvrirPage(page) {
+        window.location.href = page;
+    }
+</script>
+
+    <div class="container">
+        <h2>Historiques des transactions</h2>
+        <div class="balance">  </div>
+
+        <div class="info"><h4>15-04-2025</h4><p class="debit">Retrait ATM -400,00 €</p></div>
+        <div class="info"><h4>13-04-2025</h4><p class="credit">Reçu +2100,00 €</p></div>
+
+        <div class="hidden-transactions" id="transactionList">
+            <div class="info"><h4>01-04-2025</h4><p class="credit">Reçu +700,00 €</p></div>
+            <div class="info"><h4>01-04-2025</h4><p class="debit">Virement 91,00 €</p></div>
+
+  <div class="info"><h4>12-03-2025</h4><p class="debit">Virement -600,00 €</p></div>
+
+  <div class="info"><h4>11-03-2025</h4><p class="debit">Paiement -4800,00 €</p></div>
+        </div>
+
+        <button class="toggle-btn" onclick="toggleTransactions()">Voir plus ▼</button>
+    </div>
+
+    <div class="button-container">
+        <a href="ma-carte.html" class="round-button round-button-1"></a>
+        <a href="transférer-de-l’argent.html" class="round-button round-button-2"></a>
+    </div>
+
+    <footer>
+        <p><a href="#">Conditions d'utilisation</a> | <a href="#">Politique de confidentialité</a> | <a href="#">Contact</a></p>
+    </footer>
+
+    <script>
+        function toggleTransactions() {
+            const list = document.getElementById('transactionList');
+            list.style.display = list.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+<!-- Bouton paramètres -->
+<button class="settings-btn" onclick="toggleSidebar()"></button>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <iframe src="paramètres-clients.html"></iframe>
+</div>
+<!-- Bouton paramètres -->
+<button class="settings-btn" onclick="toggleSidebar()"></button>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <iframe src="paramètres-clients.html"></iframe>
+</div>
+
+<script>
+function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("open");
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détails de la carte</title>
+  <style>
+    :root{
+      --bg:#f0f4f8;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --primary1:#00b894;
+      --primary2:#009c9a;
+      --card:#fff;
+      --radius:16px;
+      --shadow:0 8px 20px rgba(0,0,0,.08);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:"Poppins","Segoe UI",Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      min-height:100vh;
+    }
+
+    /* En-tête */
+    header{
+      width:100%;
+      padding:24px;
+      text-align:center;
+      background:linear-gradient(135deg,var(--primary1),var(--primary2));
+      color:#fff;
+      box-shadow:0 4px 12px rgba(0,0,0,.15);
+    }
+    header h1{
+      margin:0;
+      font-size:22px;
+      font-weight:600;
+      letter-spacing:1px;
+    }
+
+  
+    /* Section détails */
+    .card-details-section {
+      background: var(--card);
+      padding: 20px 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 90%;
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .card-details-section h2 {
+      color: var(--primary2);
+      margin-bottom: 15px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .card-details-section p {
+      margin: 8px 0;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .card-details-section strong {
+      color: var(--primary2);
+    }
+
+    /* Bouton retour */
+    .back-button {
+      display:block;
+      width:fit-content;
+      margin:10px auto 40px;
+      padding: 12px 25px;
+      background: var(--primary2);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .back-button:hover {
+      background: #007f7d;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- En-tête -->
+  <header>
+    <h1>Détails de la carte</h1>
+  </header>
+
+  
+  <!-- Section infos -->
+  <div class="card-details-section">
+    <h2>Informations de la carte</h2>
+    <p><strong>Type :</strong> Carte de débit</p>
+    <p><strong>Banque :</strong> BNP Paribas</p>
+    <p><strong>Statut :</strong> Bloqué </p>
+    <p><strong>Devise :</strong> EUR (€)</p>
+    <p><strong>Plafond mensuel :</strong> 12 000 €</p>
+  </div>
+
+  <!-- Bouton retour -->
+  <a href="Solde.html" class="back-button">Retour à l'accueil</a>
+
+</body>
+</html>

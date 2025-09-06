@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transférer de l'argent</title>
+  <style>
+    :root{
+      --bg:#f0f4f8;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --primary1:#00b894; /* vert turquoise */
+      --primary2:#009c9a; /* vert profond */
+      --card:#fff;
+      --radius:12px;
+      --shadow:0 8px 20px rgba(0,0,0,.08);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      margin:0;
+      font-family:"Poppins","Segoe UI",Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      min-height:100vh;
+    }
+
+    /* En-tête */
+    header{
+      width:100%;
+      padding:24px;
+      text-align:center;
+      background:linear-gradient(135deg,var(--primary1),var(--primary2));
+      color:#fff;
+      box-shadow:0 4px 12px rgba(0,0,0,.15);
+    }
+    header h1{
+      margin:0;
+      font-size:22px;
+      font-weight:600;
+      letter-spacing:1px;
+    }
+
+    /* Section formulaire */
+    .section-apport {
+      background-color: var(--card);
+      padding: 25px 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 500px;
+      width: 100%;
+      margin: 30px auto;
+    }
+
+    .section-apport h2 {
+      color: var(--primary2);
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      color: var(--muted);
+      margin: 10px 0 5px;
+    }
+
+    input[type="number"],
+    input[type="date"],
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 80px;
+      resize: vertical;
+    }
+
+    /* Bouton de transfert */
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary2);
+      border: none;
+      color: white;
+      font-size: 1em;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #007f7d;
+      transform: scale(1.03);
+    }
+
+    /* Bouton retour */
+    .back-button {
+      display:block;
+      width:fit-content;
+      margin:20px auto 40px;
+      padding: 12px 25px;
+      background: var(--primary2);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .back-button:hover {
+      background: #007f7d;
+      transform: scale(1.05);
+    }
+/* Overlay */
+.alert-overlay {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Boîte d’alerte */
+.alert-box {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  max-width: 400px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.alert-box h3 {
+  margin: 0 0 10px;
+  color: #ff0000; 
+  font-size: 20px;
+}
+
+.alert-box p {
+  margin: 0 0 20px;
+  color: #555;
+  font-size: 15px;
+}
+
+.alert-box button {
+  padding: 10px 20px;
+  background: #009c9a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.alert-box button:hover {
+  background: #007f7d;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.9);}
+  to {opacity: 1; transform: scale(1);}
+}
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const dateInput = document.getElementById('date');
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
+
+  const compteBloque = true; // Change à false si le compte n'est pas bloqué
+
+  document.querySelector('form').addEventListener('submit', function(event) {
+    if (compteBloque) {
+      event.preventDefault(); 
+      document.getElementById("alertPopup").style.display = "flex";
+    }
+  });
+});
+
+// Fermer la popup
+function closeAlert(){
+  document.getElementById("alertPopup").style.display = "none";
+}
+  </script>
+</head>
+<body>
+
+  <!-- En-tête -->
+  <header>
+    <h1>Transférer de l'argent</h1>
+  </header>
+
+  <div class="section-apport">
+    <h2>Formulaire de transfert</h2>
+    <form action="#" method="post">
+      <label for="montant">Montant à transférer (€) :</label>
+      <input type="number" id="montant" name="montant" required>
+
+      <label for="date">Date du transfert :</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="rib">RIB :</label>
+      <input type="text" id="rib" name="rib" placeholder="Ex : FR76 1234 5678 9012 3456 7890 123" required>
+
+      <label for="bic">BIC/Swift :</label>
+      <input type="text" id="bic" name="bic" placeholder="Ex : ABCDFFGGXXX" required>
+
+      <label for="description">Description :</label>
+      <textarea id="description" name="description" placeholder="Description du transfert (optionnel)"></textarea>
+
+      <button type="submit">Transférer</button>
+    </form>
+  </div>
+
+  <!-- Bouton retour -->
+  <a href="Solde.html" class="back-button">Retour à l'accueil</a>
+<!-- Popup alerte personnalisée -->
+<div class="alert-overlay" id="alertPopup" style="display:none;">
+  <div class="alert-box">
+    <h3>Transfert impossible</h3>
+    <p>Votre compte est actuellement <strong>bloqué</strong>.<br>Veuillez contacter votre gestionnaire pour plus d’informations.</p>
+    <button onclick="closeAlert()">OK</button>
+  </div>
+</div>
+
+</body>
+</html>
